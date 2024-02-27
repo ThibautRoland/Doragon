@@ -10,10 +10,18 @@ async function scraper () {
     const allImages = []
 
     allCharacterDivs.map((div) => {
-      const startingIndex = div.search(/src=/) + 5
-      const endingIndex = div.search(/class=/) - 2
-      const src = div.substring(startingIndex, endingIndex)
-      allImages.push(src)
+      const startingIndexImg = div.search(/src=/) + 5
+      const endingIndexImg = div.search(/class=/) - 2
+      const src = div.substring(startingIndexImg, endingIndexImg)
+
+      const startingIndexName = div.search(/<h2>/) + 4
+      const endingIndexName = div.search(/<\/h2>/)
+      const name = div.substring(startingIndexName, endingIndexName)
+      console.log(name)
+      allImages.push({
+        img: src,
+        name: name
+      })
     })
     return allImages
 }
