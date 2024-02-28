@@ -7,6 +7,13 @@ import React, { useState, useEffect } from 'react';
 function App() {
   const [dataImages, setDataImages] = useState([]);
 
+  // useEffect(() => {
+  //   const allImages = scraper();
+  //   setDataImages(allImages)
+  // },
+  //   []
+  // )
+
   const handleClick = async () => {
    const allImages = await scraper()
   //  allImages.then(
