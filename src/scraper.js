@@ -9,7 +9,7 @@ async function scraper () {
 
     const allImages = []
 
-    allCharacterDivs.map((div) => {
+    allCharacterDivs.map(async (div) => {
       const startingIndexImg = div.search(/src=/) + 5
       const endingIndexImg = div.search(/class=/) - 2
       const src = div.substring(startingIndexImg, endingIndexImg)
@@ -17,15 +17,32 @@ async function scraper () {
       const startingIndexName = div.search(/<h2>/) + 4
       const endingIndexName = div.search(/<\/h2>/)
       const name = div.substring(startingIndexName, endingIndexName)
-      console.log(name)
+      const race = await characterDetailsScraper(name[0].toLowerCase() + name.substring(1))
+      
       allImages.push({
         img: src,
-        name: name
+        name: name,
+        race: race
       })
     })
     return allImages
 }
 
+async function characterDetailsScraper (name) {
+  const response = await fetch(`https://dragonball.guru/${name}`)
+  const wholePage = await response.text()
+  const fightRecordTable = wholePage.substring(wholePage.indexOf('<div class="fight-record-table">'))
+  const allDivs = fightRecordTable.split('<tr')
+  const startingIndex = allDivs[9].indexOf('<td>') + 4
+  const endingIndex = allDivs[9].indexOf('</td>')
+  // allDivs[4]
+  const race = allDivs[9].substring(startingIndex, endingIndex)
+  console.log(race)
+  console.log(startingIndex, endingIndex)
+  return race
+}
+
 module.exports = {
-    scraper
+    scraper,
+    characterDetailsScraper
 }

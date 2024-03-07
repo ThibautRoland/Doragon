@@ -1,4 +1,4 @@
-import {scraper} from './scraper';
+import {scraper, characterDetailsScraper} from './scraper';
 import React, { useState, useEffect } from 'react';
 // import axios from 'axios';
 // import { JSDOM } from 'jsdom';
@@ -16,6 +16,7 @@ function App() {
 
   const handleClick = async () => {
    const allImages = await scraper()
+   await characterDetailsScraper('chi-chi')
   //  allImages.then(
   //   function(value) { if (value) {console.log(value)}}
   //  )
@@ -39,7 +40,7 @@ function App() {
               <div className="px-6 py-4">
                 <div className="font-bold text-xl mb-2">{dbz.name}</div>
                 <p className="text-gray-700 text-base">
-                  A beautiful view of the mountains.
+                  {dbz.race}
                 </p>
               </div>
             </div>
