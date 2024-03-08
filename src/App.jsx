@@ -35,11 +35,11 @@ function App() {
         <div className='basis-4/6'>
           <div className='grid md:grid-cols-2 xl:grid-cols-3 sm:grid-cols-1 gap-4 justify-items-center'>
             {dataImages.map((dbz, i) => (
-              <div key={i} className="max-w-sm rounded-lg overflow-hidden shadow-lg p-4 h-80 w-64 flex flex-col items-center bg-orange-300/50 pt-5">
-              <img className="size-44 rounded-full" src={dbz.img} alt="Mountain" />
+              <div key={i} className="max-w-sm rounded-lg overflow-hidden shadow-lg hover:shadow-xl p-4 h-80 w-64 flex flex-col items-center bg-orange-300/50 pt-5">
+              <img className="size-44 rounded-full" src={dbz.img} alt={`picture of ${dbz.name}`} />
               <div className="px-6 py-4">
                 <div className="font-bold text-xl mb-2">{dbz.name}</div>
-                <p className="text-gray-700 text-base">
+                <p className="text-gray-700 text-base mt-4">
                   {dbz.race}
                 </p>
               </div>

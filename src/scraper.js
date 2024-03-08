@@ -1,6 +1,7 @@
 
 
 async function scraper () {
+  console.log("scraper")
     const response = await fetch('https://dragonball.guru/characters/')
     const data = await response.text()
     const dataBody = data.substring(data.indexOf('<div class="character-pic">'))
@@ -17,7 +18,7 @@ async function scraper () {
       const startingIndexName = div.search(/<h2>/) + 4
       const endingIndexName = div.search(/<\/h2>/)
       const name = div.substring(startingIndexName, endingIndexName)
-      const race = await characterDetailsScraper(name[0].toLowerCase() + name.substring(1))
+      const race = await characterDetailsScraper(name.toLowerCase().replace(' ', '-'))
       
       allImages.push({
         img: src,
